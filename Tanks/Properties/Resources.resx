@@ -124,4 +124,19 @@
   <data name="Tank" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Tank.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Tank01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tank01.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tank0_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tank0_1.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tank10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tank10.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Tank_10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Tank_10.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Wall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Wall.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

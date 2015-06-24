@@ -29,14 +29,39 @@ namespace Tanks
             InitializeComponent();
             model = new Model(sizeField, amountTanks, amountApple, speedGame);
 
-            view = new View();
+            view = new View(model);
             this.Controls.Add(view);
         }
 
         private void btnStartStop_Click(object sender, System.EventArgs e)
         {
-            modelPlay = new Thread(model.Play);
-            modelPlay.Start();
+            if (model.gameStatus == GameStatus.Playing)
+            {
+                modelPlay.Abort();
+                model.gameStatus = GameStatus.Stoping;
+            }
+            else
+            {
+                model.gameStatus = GameStatus.Playing;
+                modelPlay = new Thread(model.Play);
+                modelPlay.Start();
+
+                view.Invalidate();
+            }
+        }
+
+        private void ControllerMainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (modelPlay != null)
+            {
+                model.gameStatus = GameStatus.Stoping;
+                modelPlay.Abort();
+            }
+           DialogResult dr = MessageBox.Show("Вы уверены?", "Tanks", MessageBoxButtons.YesNo);
+            if (dr == DialogResult.Yes)
+                e.Cancel = false;
+            else
+                e.Cancel = true;
         }
     }
 }
