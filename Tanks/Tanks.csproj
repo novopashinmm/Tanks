@@ -103,22 +103,25 @@
     <None Include="Resources\MainIcon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Tank.bmp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\Wall.bmp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Tank0_1.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Tank01.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Tank_10.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Tank10.bmp" />
+    <Content Include="Resources\TankCaterpilars\Down\Tank01I.bmp" />
+    <Content Include="Resources\TankCaterpilars\Down\Tank01II.bmp" />
+    <Content Include="Resources\TankCaterpilars\Down\Tank01III.bmp" />
+    <Content Include="Resources\TankCaterpilars\Down\Tank01IV.bmp" />
+    <Content Include="Resources\TankCaterpilars\Left\Tank_10I.bmp" />
+    <Content Include="Resources\TankCaterpilars\Left\Tank_10II.bmp" />
+    <Content Include="Resources\TankCaterpilars\Left\Tank_10III.bmp" />
+    <Content Include="Resources\TankCaterpilars\Left\Tank_10IV.bmp" />
+    <Content Include="Resources\TankCaterpilars\Right\Tank10I.bmp" />
+    <Content Include="Resources\TankCaterpilars\Right\Tank10II.bmp" />
+    <Content Include="Resources\TankCaterpilars\Right\Tank10III.bmp" />
+    <Content Include="Resources\TankCaterpilars\Right\Tank10IV.bmp" />
+    <Content Include="Resources\TankCaterpilars\Up\Tank0_1I.bmp" />
+    <Content Include="Resources\TankCaterpilars\Up\Tank0_1II.bmp" />
+    <Content Include="Resources\TankCaterpilars\Up\Tank0_1III.bmp" />
+    <Content Include="Resources\TankCaterpilars\Up\Tank0_1IV.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

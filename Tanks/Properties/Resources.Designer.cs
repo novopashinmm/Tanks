@@ -73,9 +73,9 @@ namespace Tanks.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Tank {
+        internal static System.Drawing.Bitmap Tank_10I {
             get {
-                object obj = ResourceManager.GetObject("Tank", resourceCulture);
+                object obj = ResourceManager.GetObject("Tank_10I", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace Tanks.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Tank_10 {
+        internal static System.Drawing.Bitmap Tank_10II {
             get {
-                object obj = ResourceManager.GetObject("Tank_10", resourceCulture);
+                object obj = ResourceManager.GetObject("Tank_10II", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +93,9 @@ namespace Tanks.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Tank0_1 {
+        internal static System.Drawing.Bitmap Tank_10III {
             get {
-                object obj = ResourceManager.GetObject("Tank0_1", resourceCulture);
+                object obj = ResourceManager.GetObject("Tank_10III", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +103,9 @@ namespace Tanks.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Tank01 {
+        internal static System.Drawing.Bitmap Tank_10IV {
             get {
-                object obj = ResourceManager.GetObject("Tank01", resourceCulture);
+                object obj = ResourceManager.GetObject("Tank_10IV", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -113,9 +113,119 @@ namespace Tanks.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Tank10 {
+        internal static System.Drawing.Bitmap Tank0_1I {
             get {
-                object obj = ResourceManager.GetObject("Tank10", resourceCulture);
+                object obj = ResourceManager.GetObject("Tank0_1I", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tank0_1II {
+            get {
+                object obj = ResourceManager.GetObject("Tank0_1II", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tank0_1III {
+            get {
+                object obj = ResourceManager.GetObject("Tank0_1III", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tank0_1IV {
+            get {
+                object obj = ResourceManager.GetObject("Tank0_1IV", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tank01I {
+            get {
+                object obj = ResourceManager.GetObject("Tank01I", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tank01II {
+            get {
+                object obj = ResourceManager.GetObject("Tank01II", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tank01III {
+            get {
+                object obj = ResourceManager.GetObject("Tank01III", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tank01IV {
+            get {
+                object obj = ResourceManager.GetObject("Tank01IV", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tank10I {
+            get {
+                object obj = ResourceManager.GetObject("Tank10I", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tank10II {
+            get {
+                object obj = ResourceManager.GetObject("Tank10II", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tank10III {
+            get {
+                object obj = ResourceManager.GetObject("Tank10III", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Tank10IV {
+            get {
+                object obj = ResourceManager.GetObject("Tank10IV", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

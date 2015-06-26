@@ -5,8 +5,10 @@ namespace Tanks
 {
     public class Tank : IRun, ITurn, ITransparent
     {
-        readonly TankImg tankImg = new TankImg();
-        private readonly Image img;
+        TankImg tankImg = new TankImg();
+        private Image[] img;
+        private Image currentImg;
+
         private int x, y;
         private int direct_x;
         private int direct_y;
@@ -17,20 +19,13 @@ namespace Tanks
         public Tank(int sizeField)
         {
             r = new Random();
-
-            img = tankImg.Img;
-
             DirectX = 0;
             DirectY = 1;
-
+            PutImg();
+            PutCurrentImage();
             x = 80;
             y = 80;
             this.sizeField = sizeField;
-        }
-
-        public Image Img
-        {
-            get {return img; }
         }
 
         public int X
@@ -67,14 +62,30 @@ namespace Tanks
             }
         }
 
+        public Image CurrentImg
+        {
+            get { return currentImg; }
+        }
 
+        
         public void Run()
         {
             x += direct_x;
             y += direct_y;
             if (Math.IEEERemainder(x, 40) == 0 && Math.IEEERemainder(y, 40) == 0)
                 Turn();
+
+            PutCurrentImage();
+
             Transparent();
+        }
+
+        private int k;
+        private void PutCurrentImage()
+        {
+            currentImg = img[k];
+            k++;
+            if (k == 4) k = 0;
         }
 
         public void Turn()
@@ -97,6 +108,7 @@ namespace Tanks
                         DirectX = r.Next(-1, 2);
                 }
             }
+            PutImg();
         }
 
         public void Transparent()
@@ -109,6 +121,18 @@ namespace Tanks
                 y = sizeField - 21;
             if (y == sizeField - 19)
                 y = 1;
+        }
+
+        public void PutImg()
+        {
+            if (direct_x == 1)
+                img = tankImg.Right;
+            if (direct_x == -1)
+                img = tankImg.Left;
+            if (direct_y == 1)
+                img = tankImg.Down;
+            if (direct_y == -1)
+                img = tankImg.Up;
         }
     }
 }
