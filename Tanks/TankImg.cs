@@ -44,25 +44,21 @@ namespace Tanks
         public Image[] Up
         {
             get { return _up; }
-            set { _up = value; }
         }
 
         public Image[] Down
         {
             get { return _down; }
-            set { _down = value; }
         }
 
         public Image[] Left
         {
             get { return _left; }
-            set { _left = value; }
         }
 
         public Image[] Right
         {
             get { return _right; }
-            set { _right = value; }
         }
     }
 }

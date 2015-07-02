@@ -35,7 +35,8 @@ namespace Tanks
 
         private void DrawTank(PaintEventArgs e)
         {
-            e.Graphics.DrawImage(model.tank.CurrentImg, new Point(model.tank.X, model.tank.Y));
+            foreach (var tank in model.Tanks)
+                e.Graphics.DrawImage(tank.CurrentImg, new Point(tank.X, tank.Y));
         }
 
         private void DrawWall(PaintEventArgs e)

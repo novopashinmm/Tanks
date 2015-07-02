@@ -16,15 +16,19 @@ namespace Tanks
 
         private static Random r;
 
-        public Tank(int sizeField)
+        public Tank(int sizeField, int x, int y)
         {
             r = new Random();
-            DirectX = 0;
-            DirectY = 1;
+            DirectX = r.Next(-1, 2);
+            if (DirectX == 0)
+                while (DirectY == 0)
+                    DirectY = r.Next(-1, 2);
+            else
+                DirectY = 0;
             PutImg();
             PutCurrentImage();
-            x = 80;
-            y = 80;
+            this.x = x;
+            this.y = y;
             this.sizeField = sizeField;
         }
 

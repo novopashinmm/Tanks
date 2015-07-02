@@ -16,19 +16,45 @@ namespace Tanks
 
         public GameStatus gameStatus;
 
-        public Tank tank;
+        private Random r;
+
+        private List<Tank> tanks;
+        internal List<Tank> Tanks
+        {
+            get { return tanks; }
+        }
+
+
         public Wall wall;
         public Model(int sizeField, int amountTanks, int amountApple, int speedGame)
         {
+            r = new Random();
+
+            tanks = new List<Tank>();
+
             this.sizeField = sizeField;
             this.amountTanks = amountTanks;
             this.amountApple = amountApple;
             this.speedGame = speedGame;
 
-            tank = new Tank(sizeField);
+            CreateTanks();
             wall = new Wall();
 
             gameStatus = GameStatus.Stoping;
+        }
+
+        private void CreateTanks()
+        {
+            int x, y;
+            while (tanks.Count < amountTanks)
+            {
+                x = r.Next(6)*40;
+                y = r.Next(6)*40;
+                bool flag = tanks.All(tank => tank.X != x || tank.Y != y);
+
+                if (flag)
+                    tanks.Add(new Tank(sizeField,x,y));
+            }
         }
 
         public void Play()
@@ -36,7 +62,8 @@ namespace Tanks
             while (gameStatus == GameStatus.Playing)
             {
                 Thread.Sleep(speedGame);
-                tank.Run();
+                foreach (var tank in tanks)
+                    tank.Run();
             }
         }
     }
