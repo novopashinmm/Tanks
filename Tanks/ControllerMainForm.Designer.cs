@@ -38,9 +38,10 @@
             this.btnStartStop.Name = "btnStartStop";
             this.btnStartStop.Size = new System.Drawing.Size(75, 23);
             this.btnStartStop.TabIndex = 0;
-            this.btnStartStop.Text = "Start/Stop";
+            this.btnStartStop.Text = "Start/Pause";
             this.btnStartStop.UseVisualStyleBackColor = true;
             this.btnStartStop.Click += new System.EventHandler(this.btnStartStop_Click);
+            this.btnStartStop.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ManipulatePacman);
             // 
             // ControllerMainForm
             // 

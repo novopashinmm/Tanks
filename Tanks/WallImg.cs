@@ -14,7 +14,6 @@ namespace Tanks
         public Image Img
         {
             get { return img; }
-            set { img = value;}
         }
     }
 }

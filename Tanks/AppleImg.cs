@@ -7,16 +7,9 @@ using System.Threading.Tasks;
 
 namespace Tanks
 {
-    public class Wall : IPicture
+    class AppleImg
     {
-        WallImg wallImg = new WallImg();
-
-        private Image img;
-
-        public Wall()
-        {
-            img = wallImg.Img;
-        }
+        private Image img = Properties.Resources.Apple;
 
         public Image Img
         {

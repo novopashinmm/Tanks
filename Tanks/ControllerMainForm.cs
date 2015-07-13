@@ -63,5 +63,33 @@ namespace Tanks
             else
                 e.Cancel = true;
         }
+
+        private void ManipulatePacman(object sender, KeyPressEventArgs e)
+        {
+            switch (e.KeyChar)
+            {
+                case 'ф':
+                case 'a':
+                    model.Pacman.NextDirectX = -1;
+                    model.Pacman.NextDirectY = 0;
+                    break;
+                case 'в':
+                case 'd':
+                    model.Pacman.NextDirectX = 1;
+                    model.Pacman.NextDirectY = 0;
+                    break;
+                case 'ц':
+                case 'w':
+                    model.Pacman.NextDirectY = -1;
+                    model.Pacman.NextDirectX = 0;
+                    break;
+                case 'ы':
+                case 's':
+                    model.Pacman.NextDirectY = 1;
+                    model.Pacman.NextDirectX = 0;
+                    break;
+                default: break;
+            }
+        }
     }
 }

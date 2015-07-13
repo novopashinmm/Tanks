@@ -24,7 +24,10 @@ namespace Tanks
         void Draw(PaintEventArgs e)
         {
             DrawWall(e);
+            DrawApple(e);
             DrawTank(e);
+            DrawPacman(e);
+            
 
             if (model.gameStatus != GameStatus.Playing)
                 return;
@@ -33,10 +36,23 @@ namespace Tanks
             Invalidate();
         }
 
+        private void DrawPacman(PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(model.Pacman.CurrentImg, new Point(model.Pacman.X, model.Pacman.Y));
+        }
+
         private void DrawTank(PaintEventArgs e)
         {
             foreach (var tank in model.Tanks)
                 e.Graphics.DrawImage(tank.CurrentImg, new Point(tank.X, tank.Y));
+        }
+
+        private void DrawApple(PaintEventArgs e)
+        {
+            for (int i = 0; i < model.Apples.Count; i++)
+            {
+                e.Graphics.DrawImage(model.Apples[i].Img, new Point(model.Apples[i].X, model.Apples[i].Y));
+            }
         }
 
         private void DrawWall(PaintEventArgs e)

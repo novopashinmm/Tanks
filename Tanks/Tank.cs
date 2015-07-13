@@ -3,19 +3,36 @@ using System.Drawing;
 
 namespace Tanks
 {
-    public class Tank : IRun, ITurn, ITransparent
+    public class Tank : IRun, ITurn, ITurnAround, ITransparent, ICurrentPicture
     {
-        TankImg tankImg = new TankImg();
-        private Image[] img;
-        private Image currentImg;
-
-        private int x, y;
-        private int direct_x;
-        private int direct_y;
-        private int sizeField;
-
-        private static Random r;
-
+        private void PutImg()
+        {
+            if (direct_x == 1)
+                img = tankImg.Right;
+            if (direct_x == -1)
+                img = tankImg.Left;
+            if (direct_y == 1)
+                img = tankImg.Down;
+            if (direct_y == -1)
+                img = tankImg.Up;
+        }
+        private TankImg tankImg = new TankImg();
+        
+        protected Image[] img;
+        protected Image currentImg;
+        protected int x, y;
+        protected int direct_x;
+        protected int direct_y;
+        protected int sizeField;
+        protected int k;
+        protected void PutCurrentImage()
+        {
+            currentImg = img[k];
+            k++;
+            if (k == 4) k = 0;
+        }
+        protected static Random r;
+        
         public Tank(int sizeField, int x, int y)
         {
             r = new Random();
@@ -31,17 +48,14 @@ namespace Tanks
             this.y = y;
             this.sizeField = sizeField;
         }
-
         public int X
         {
             get { return x; }
         }
-
         public int Y
         {
             get { return y; }
         }
-
         public int DirectX
         {
             get { return direct_x; }
@@ -53,7 +67,6 @@ namespace Tanks
                     direct_x = 0;
             }
         }
-
         public int DirectY
         {
             get { return direct_y; }
@@ -65,13 +78,10 @@ namespace Tanks
                     direct_y = 0;
             }
         }
-
         public Image CurrentImg
         {
             get { return currentImg; }
         }
-
-        
         public void Run()
         {
             x += direct_x;
@@ -83,15 +93,6 @@ namespace Tanks
 
             Transparent();
         }
-
-        private int k;
-        private void PutCurrentImage()
-        {
-            currentImg = img[k];
-            k++;
-            if (k == 4) k = 0;
-        }
-
         public void Turn()
         {
             if (r.Next(5000) < 2500) // двигаемся далее по вертикали
@@ -114,7 +115,6 @@ namespace Tanks
             }
             PutImg();
         }
-
         public void Transparent()
         {
             if (x == -1)
@@ -126,17 +126,11 @@ namespace Tanks
             if (y == sizeField - 19)
                 y = 1;
         }
-
-        public void PutImg()
+        public void TurnAround()
         {
-            if (direct_x == 1)
-                img = tankImg.Right;
-            if (direct_x == -1)
-                img = tankImg.Left;
-            if (direct_y == 1)
-                img = tankImg.Down;
-            if (direct_y == -1)
-                img = tankImg.Up;
+            DirectX = -1*DirectX;
+            DirectY = -1*DirectY;
+            PutImg();
         }
     }
 }
