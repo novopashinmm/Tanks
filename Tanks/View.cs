@@ -27,13 +27,18 @@ namespace Tanks
             DrawApple(e);
             DrawTank(e);
             DrawPacman(e);
-            
+            DrawProjectTile(e);
 
             if (model.gameStatus != GameStatus.Playing)
                 return;
 
             Thread.Sleep(model.speedGame);
             Invalidate();
+        }
+
+        private void DrawProjectTile(PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(model.Tile.Img, new Point(model.Tile.X, model.Tile.Y));
         }
 
         private void DrawPacman(PaintEventArgs e)

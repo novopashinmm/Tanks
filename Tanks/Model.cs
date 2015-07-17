@@ -19,6 +19,8 @@ namespace Tanks
 
         private Random r;
 
+        public ProjectTile Tile { get; private set; }
+
         public Pacman Pacman { get; private set; }
 
         private List<Tank> tanks;
@@ -33,8 +35,9 @@ namespace Tanks
         public Model(int sizeField, int amountTanks, int amountApple, int speedGame)
         {
             r = new Random();
+            
 
-
+            Tile = new ProjectTile();
             Pacman = new Pacman(sizeField);
             tanks = new List<Tank>();
             Apples = new List<Apple>();
@@ -88,6 +91,7 @@ namespace Tanks
             {
                 Thread.Sleep(speedGame);
 
+                Tile.Run();
                 Pacman.Run();
                 ((Hunter)tanks[0]).Run(Pacman.X,Pacman.Y);
                 for (int i = 1; i < tanks.Count; i++)

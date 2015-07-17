@@ -88,7 +88,13 @@ namespace Tanks
                     model.Pacman.NextDirectY = 1;
                     model.Pacman.NextDirectX = 0;
                     break;
-                default: break;
+                default:
+                    model.Tile.X = model.Pacman.X;
+                    model.Tile.Y = model.Pacman.Y;
+                    model.Tile.DirectX = model.Pacman.DirectX;
+                    model.Tile.DirectY = model.Pacman.DirectY;
+                    break;
+
             }
         }
     }

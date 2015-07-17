@@ -8,8 +8,6 @@ namespace Tanks
 {
     class Hunter : Tank
     {
-        private int target_x, target_y;
-
         HunterImg hunterImg = new HunterImg();
         private void PutImg()
         {
@@ -25,9 +23,6 @@ namespace Tanks
 
         public void Run(int target_x, int target_y)
         {
-            this.target_x = target_x;
-            this.target_y = target_y;
-
             x += direct_x;
             y += direct_y;
             if (Math.IEEERemainder(x, 40) == 0 && Math.IEEERemainder(y, 40) == 0)
@@ -38,8 +33,9 @@ namespace Tanks
             Transparent();
         }
 
-        new public void Turn(int target_x, int target_y)
+        public void Turn(int target_x, int target_y)
         {
+            DirectX = DirectY = 0;
             if (X > target_x)
                 DirectX = -1;
             if (X < target_x)

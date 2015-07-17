@@ -66,6 +66,8 @@
     <Compile Include="Pacman.cs" />
     <Compile Include="PacmanImg.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProjectTile.cs" />
+    <Compile Include="ProjectTileImg.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -114,6 +116,7 @@
     <None Include="Resources\Wall.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Tile\Tile.bmp" />
     <None Include="Resources\Apple.bmp" />
     <None Include="Resources\Hunter\Up\Hunter0_1I.bmp" />
     <None Include="Resources\Hunter\Up\Hunter0_1II.bmp" />
