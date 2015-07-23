@@ -9,6 +9,7 @@ namespace Tanks
 {
     public class ProjectTile
     {
+        private int km;
         private ProjectTileImg projectTileImg = new ProjectTileImg();
         public Image Img { get; private set; }
 
@@ -19,8 +20,14 @@ namespace Tanks
         public ProjectTile()
         {
             Img = projectTileImg.ProjectTileImage;
+            DefaultSettings();
+        }
+
+        public void DefaultSettings()
+        {
             X = Y = -10;
             DirectX = DirectY = 0;
+            km = 0;
         }
         public int DirectX
         {
@@ -47,9 +54,14 @@ namespace Tanks
 
         public void Run()
         {
+            if (DirectX == 0 && DirectY == 0)
+                return;
+            km += 4;
             PutImg();
-            X += DirectX * 2;
-            Y += DirectY * 2;
+            X += DirectX * 4;
+            Y += DirectY * 4;
+            if (km > 140)
+                DefaultSettings();
         }
 
         private void PutImg()

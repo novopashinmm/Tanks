@@ -37,11 +37,13 @@ namespace Tanks
         {
             if (model.gameStatus == GameStatus.Playing)
             {
+                StartStop_pcbx.Focus();
                 modelPlay.Abort();
                 model.gameStatus = GameStatus.Stoping;
             }
             else
             {
+                StartStop_pcbx.Focus();
                 model.gameStatus = GameStatus.Playing;
                 modelPlay = new Thread(model.Play);
                 modelPlay.Start();
@@ -64,37 +66,56 @@ namespace Tanks
                 e.Cancel = true;
         }
 
-        private void ManipulatePacman(object sender, KeyPressEventArgs e)
+        private void ControllerMainForm_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
-            switch (e.KeyChar)
+            
+        }
+
+        private void StartStop_pcbx_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            switch (e.KeyData.ToString())
             {
-                case 'ф':
-                case 'a':
+                case "A":
                     model.Pacman.NextDirectX = -1;
                     model.Pacman.NextDirectY = 0;
                     break;
-                case 'в':
-                case 'd':
+                case "D":
                     model.Pacman.NextDirectX = 1;
                     model.Pacman.NextDirectY = 0;
                     break;
-                case 'ц':
-                case 'w':
+                case "W":
                     model.Pacman.NextDirectY = -1;
                     model.Pacman.NextDirectX = 0;
                     break;
-                case 'ы':
-                case 's':
+                case "S":
                     model.Pacman.NextDirectY = 1;
                     model.Pacman.NextDirectX = 0;
                     break;
-                default:
-                    model.Tile.X = model.Pacman.X;
-                    model.Tile.Y = model.Pacman.Y;
+                case "F":
                     model.Tile.DirectX = model.Pacman.DirectX;
                     model.Tile.DirectY = model.Pacman.DirectY;
-                    break;
 
+                    if (model.Pacman.DirectY == -1)
+                    {
+                        model.Tile.X = model.Pacman.X + 5;
+                        model.Tile.Y = model.Pacman.Y;
+                    }
+                    if (model.Pacman.DirectY == 1)
+                    {
+                        model.Tile.X = model.Pacman.X + 5;
+                        model.Tile.Y = model.Pacman.Y + 20;
+                    }
+                    if (model.Pacman.DirectX == -1)
+                    {
+                        model.Tile.X = model.Pacman.X;
+                        model.Tile.Y = model.Pacman.Y + 5;
+                    }
+                    if (model.Pacman.DirectX == 1)
+                    {
+                        model.Tile.X = model.Pacman.X + 20;
+                        model.Tile.Y = model.Pacman.Y + 5;
+                    }
+                    break;
             }
         }
     }

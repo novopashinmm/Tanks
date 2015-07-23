@@ -29,6 +29,8 @@ namespace Tanks
             get { return tanks; }
         }
 
+        public List<FireTank> FireTanks { get; private set; }
+
         public List<Apple> Apples { get; private set; }
 
         public Wall wall;
@@ -40,6 +42,7 @@ namespace Tanks
             Tile = new ProjectTile();
             Pacman = new Pacman(sizeField);
             tanks = new List<Tank>();
+            FireTanks = new List<FireTank>();
             Apples = new List<Apple>();
 
             this.sizeField = sizeField;
@@ -97,7 +100,25 @@ namespace Tanks
                 for (int i = 1; i < tanks.Count; i++)
                     tanks[i].Run();
 
-                for (int i = 0; i < tanks.Count-1; i++)
+                foreach (var fireTank in FireTanks)
+                    fireTank.Fire();
+
+                for (int i = 1; i < tanks.Count; i++)
+                {
+                    if (
+                        (Tile.X - tanks[i].X) < 19 &&
+                        (Tile.Y - tanks[i].Y) < 19 &&
+                        (Tile.X - tanks[i].X) > -9 &&
+                        (Tile.Y - tanks[i].Y) > -9
+                        )
+                    {
+                        FireTanks.Add(new FireTank(tanks[i].X, tanks[i].Y));
+                        tanks.RemoveAt(i);
+                        Tile.DefaultSettings();
+                    }
+                }
+
+                for (int i = 0; i < tanks.Count; i++)
                 {
                     for (int j = i + 1; j < tanks.Count; j++)
                         if (

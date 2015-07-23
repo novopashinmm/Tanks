@@ -24,6 +24,7 @@ namespace Tanks
         void Draw(PaintEventArgs e)
         {
             DrawWall(e);
+            DrawFireTank(e);
             DrawApple(e);
             DrawTank(e);
             DrawPacman(e);
@@ -34,6 +35,14 @@ namespace Tanks
 
             Thread.Sleep(model.speedGame);
             Invalidate();
+        }
+
+        private void DrawFireTank(PaintEventArgs e)
+        {
+            foreach (var ft in model.FireTanks)
+            {
+                e.Graphics.DrawImage(ft.CurrenImage, new Point(ft.X,ft.Y));
+            }
         }
 
         private void DrawProjectTile(PaintEventArgs e)
@@ -48,8 +57,8 @@ namespace Tanks
 
         private void DrawTank(PaintEventArgs e)
         {
-            foreach (var tank in model.Tanks)
-                e.Graphics.DrawImage(tank.CurrentImg, new Point(tank.X, tank.Y));
+            for(int i = 0; i < model.Tanks.Count; i++)
+                e.Graphics.DrawImage(model.Tanks[i].CurrentImg, new Point(model.Tanks[i].X, model.Tanks[i].Y));
         }
 
         private void DrawApple(PaintEventArgs e)

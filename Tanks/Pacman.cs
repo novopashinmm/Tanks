@@ -75,8 +75,8 @@ namespace Tanks
 
         public void Run()
         {
-            x += direct_x * 2;
-            y += direct_y * 2;
+            x += direct_x;
+            y += direct_y;
             if (Math.IEEERemainder(x, 40) == 0 && Math.IEEERemainder(y, 40) == 0)
                 Turn();
 
