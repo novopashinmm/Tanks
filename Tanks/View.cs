@@ -30,10 +30,10 @@ namespace Tanks
             DrawPacman(e);
             DrawProjectTile(e);
 
-            if (model.gameStatus != GameStatus.Playing)
+            if (model.GameStatus != GameStatus.Playing)
                 return;
 
-            Thread.Sleep(model.speedGame);
+            Thread.Sleep(model.SpeedGame);
             Invalidate();
         }
 

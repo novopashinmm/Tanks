@@ -1,14 +1,18 @@
 ﻿using System.Threading;
 using System.Windows.Forms;
+using Tanks.Properties;
 
 namespace Tanks
 {
+    internal delegate void Invoker();
     public partial class ControllerMainForm : Form
     {
-        private View view;
-        private Model model;
+        private readonly View _view;
+        private readonly Model _model;
 
-        private Thread modelPlay;
+        private bool _isSound;
+
+        private Thread _modelPlay;
 
         public ControllerMainForm() : this(260)
         {
@@ -27,43 +31,56 @@ namespace Tanks
         public ControllerMainForm(int sizeField, int amountTanks, int amountApple, int speedGame)
         {
             InitializeComponent();
-            model = new Model(sizeField, amountTanks, amountApple, speedGame);
+            _model = new Model(sizeField, amountTanks, amountApple, speedGame);
+            _model.ChangeStreep += ChangerStatusStripLbl;
+            _view = new View(_model);
+            Controls.Add(_view);
 
-            view = new View(model);
-            this.Controls.Add(view);
+            _isSound = true;
         }
 
-        private void btnStartStop_Click(object sender, System.EventArgs e)
+        void ChangerStatusStripLbl()
         {
-            if (model.gameStatus == GameStatus.Playing)
+            Invoke(new Invoker(SetValueToStrLbl));
+        }
+
+        private void SetValueToStrLbl()
+        {
+            GameStatus_lbl_ststrp.Text = _model.GameStatus.ToString();
+        }
+
+        private void StartPause_btn_Click(object sender, System.EventArgs e)
+        {
+            if (_model.GameStatus == GameStatus.Playing)
             {
                 StartStop_pcbx.Focus();
-                modelPlay.Abort();
-                model.gameStatus = GameStatus.Stoping;
+                _modelPlay.Abort();
+                _model.GameStatus = GameStatus.Stoping;
+                ChangerStatusStripLbl();
             }
             else
             {
                 StartStop_pcbx.Focus();
-                model.gameStatus = GameStatus.Playing;
-                modelPlay = new Thread(model.Play);
-                modelPlay.Start();
-
-                view.Invalidate();
+                _model.GameStatus = GameStatus.Playing;
+                _modelPlay = new Thread(_model.Play);
+                _modelPlay.Start();
+                ChangerStatusStripLbl();
+                _view.Invalidate();
             }
         }
 
         private void ControllerMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (modelPlay != null)
+            if (_modelPlay != null)
             {
-                model.gameStatus = GameStatus.Stoping;
-                modelPlay.Abort();
+                _model.GameStatus = GameStatus.Stoping;
+                _modelPlay.Abort();
             }
-           DialogResult dr = MessageBox.Show("Вы уверены?", "Tanks", MessageBoxButtons.YesNo);
-            if (dr == DialogResult.Yes)
-                e.Cancel = false;
-            else
-                e.Cancel = true;
+            if (Resources.ControllerMainForm_ControllerMainForm_FormClosing_Вы_уверены_ != null)
+            {
+                DialogResult dr = MessageBox.Show(text: Resources.ControllerMainForm_ControllerMainForm_FormClosing_Вы_уверены_, caption: "Tanks", buttons: MessageBoxButtons.YesNo);
+                e.Cancel = dr != DialogResult.Yes;
+            }
         }
 
         private void ControllerMainForm_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -76,47 +93,75 @@ namespace Tanks
             switch (e.KeyData.ToString())
             {
                 case "A":
-                    model.Pacman.NextDirectX = -1;
-                    model.Pacman.NextDirectY = 0;
+                    _model.Pacman.NextDirectX = -1;
+                    _model.Pacman.NextDirectY = 0;
                     break;
                 case "D":
-                    model.Pacman.NextDirectX = 1;
-                    model.Pacman.NextDirectY = 0;
+                    _model.Pacman.NextDirectX = 1;
+                    _model.Pacman.NextDirectY = 0;
                     break;
                 case "W":
-                    model.Pacman.NextDirectY = -1;
-                    model.Pacman.NextDirectX = 0;
+                    _model.Pacman.NextDirectY = -1;
+                    _model.Pacman.NextDirectX = 0;
                     break;
                 case "S":
-                    model.Pacman.NextDirectY = 1;
-                    model.Pacman.NextDirectX = 0;
+                    _model.Pacman.NextDirectY = 1;
+                    _model.Pacman.NextDirectX = 0;
                     break;
                 case "F":
-                    model.Tile.DirectX = model.Pacman.DirectX;
-                    model.Tile.DirectY = model.Pacman.DirectY;
+                    _model.Tile.DirectX = _model.Pacman.DirectX;
+                    _model.Tile.DirectY = _model.Pacman.DirectY;
 
-                    if (model.Pacman.DirectY == -1)
+                    if (_model.Pacman.DirectY == -1)
                     {
-                        model.Tile.X = model.Pacman.X + 5;
-                        model.Tile.Y = model.Pacman.Y;
+                        _model.Tile.X = _model.Pacman.X + 5;
+                        _model.Tile.Y = _model.Pacman.Y;
                     }
-                    if (model.Pacman.DirectY == 1)
+                    if (_model.Pacman.DirectY == 1)
                     {
-                        model.Tile.X = model.Pacman.X + 5;
-                        model.Tile.Y = model.Pacman.Y + 20;
+                        _model.Tile.X = _model.Pacman.X + 5;
+                        _model.Tile.Y = _model.Pacman.Y + 20;
                     }
-                    if (model.Pacman.DirectX == -1)
+                    if (_model.Pacman.DirectX == -1)
                     {
-                        model.Tile.X = model.Pacman.X;
-                        model.Tile.Y = model.Pacman.Y + 5;
+                        _model.Tile.X = _model.Pacman.X;
+                        _model.Tile.Y = _model.Pacman.Y + 5;
                     }
-                    if (model.Pacman.DirectX == 1)
+                    if (_model.Pacman.DirectX == 1)
                     {
-                        model.Tile.X = model.Pacman.X + 20;
-                        model.Tile.Y = model.Pacman.Y + 5;
+                        _model.Tile.X = _model.Pacman.X + 20;
+                        _model.Tile.Y = _model.Pacman.Y + 5;
                     }
                     break;
             }
+        }
+
+        private void infoToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void newGameToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            _model.NewGame();
+            _view.Refresh();
+        }
+
+        private void AboutToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            MessageBox.Show("Игра \"Пакмен\" версии 1.0\n" +
+                            "Разработчик Новопашин Михаил\n" +
+                            "Для управления используйте w,s,a,d и выстрел f", "Tanks");
+        }
+
+        private void SoundToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            _isSound = !_isSound;
         }
     }
 }

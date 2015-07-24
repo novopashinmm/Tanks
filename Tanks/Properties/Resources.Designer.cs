@@ -71,6 +71,15 @@ namespace Tanks.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Вы уверены?.
+        /// </summary>
+        internal static string ControllerMainForm_ControllerMainForm_FormClosing_Вы_уверены_ {
+            get {
+                return ResourceManager.GetString("ControllerMainForm_ControllerMainForm_FormClosing_Вы_уверены_", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap FireTank {

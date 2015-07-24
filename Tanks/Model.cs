@@ -1,32 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Tanks
 {
+    public delegate void Streep();
     public class Model
     {
-        private int sizeField;
-        private int amountTanks;
-        private int amountApple;
-        public int speedGame;
-        private int collectedApples;
+        public event Streep ChangeStreep;
 
-        public GameStatus gameStatus;
 
-        private Random r;
+        private readonly int _sizeField;
+        private readonly int _amountTanks;
+        private readonly int _amountApple;
+        public int SpeedGame;
+        private int _collectedApples;
+
+        public GameStatus GameStatus;
+
+        private readonly Random _r;
 
         public ProjectTile Tile { get; private set; }
 
         public Pacman Pacman { get; private set; }
 
-        private List<Tank> tanks;
+        private List<Tank> _tanks;
         internal List<Tank> Tanks
         {
-            get { return tanks; }
+            get { return _tanks; }
         }
 
         public List<FireTank> FireTanks { get; private set; }
@@ -36,35 +38,24 @@ namespace Tanks
         public Wall wall;
         public Model(int sizeField, int amountTanks, int amountApple, int speedGame)
         {
-            r = new Random();
+            _r = new Random();
             
+            _sizeField = sizeField;
+            _amountTanks = amountTanks;
+            _amountApple = amountApple;
+            SpeedGame = speedGame;
 
-            Tile = new ProjectTile();
-            Pacman = new Pacman(sizeField);
-            tanks = new List<Tank>();
-            FireTanks = new List<FireTank>();
-            Apples = new List<Apple>();
-
-            this.sizeField = sizeField;
-            this.amountTanks = amountTanks;
-            this.amountApple = amountApple;
-            this.speedGame = speedGame;
-
-            CreateTanks();
-            CreateApples();
-            wall = new Wall();
-
-            gameStatus = GameStatus.Stoping;
+            NewGame();
         }
 
 
         private void CreateApples(int newApples = 0)
         {
             int x, y;
-            while (Apples.Count < amountApple + newApples)
+            while (Apples.Count < _amountApple + newApples)
             {
-                x = r.Next(6) * 40;
-                y = r.Next(6) * 40;
+                x = _r.Next(6) * 40;
+                y = _r.Next(6) * 40;
                 bool flag = Apples.All(apple => apple.X != x || apple.Y != y);
 
                 if (flag)
@@ -75,80 +66,92 @@ namespace Tanks
         private void CreateTanks()
         {
             int x, y;
-            while (tanks.Count < amountTanks + 1)
+            while (_tanks.Count < _amountTanks + 1)
             {
-                if (tanks.Count == 0)
-                    tanks.Add(new Hunter(sizeField, r.Next(6) * 40, r.Next(6) * 40));
-                x = r.Next(6)*40;
-                y = r.Next(6)*40;
-                bool flag = tanks.All(tank => tank.X != x || tank.Y != y);
+                if (_tanks.Count == 0)
+                    _tanks.Add(new Hunter(_sizeField, _r.Next(6) * 40, _r.Next(6) * 40));
+                x = _r.Next(6)*40;
+                y = _r.Next(6)*40;
+                bool flag = _tanks.All(tank => tank.X != x || tank.Y != y);
 
                 if (flag)
-                    tanks.Add(new Tank(sizeField,x,y));
+                    _tanks.Add(new Tank(_sizeField,x,y));
             }
         }
 
+        private bool abilitKillHunter = true;
         public void Play()
         {
-            while (gameStatus == GameStatus.Playing)
+            while (GameStatus == GameStatus.Playing)
             {
-                Thread.Sleep(speedGame);
+                Thread.Sleep(SpeedGame);
 
                 Tile.Run();
                 Pacman.Run();
-                ((Hunter)tanks[0]).Run(Pacman.X,Pacman.Y);
-                for (int i = 1; i < tanks.Count; i++)
-                    tanks[i].Run();
+                if (_tanks.Count>0 && _tanks[0] is Hunter)
+                    ((Hunter)_tanks[0]).Run(Pacman.X,Pacman.Y);
+                if(_tanks.Count > 0)
+                if (_tanks[0] is Hunter)
+                    for (int i = 1; i < _tanks.Count; i++)
+                        _tanks[i].Run();
+                else
+                    foreach (Tank t in _tanks)
+                        t.Run();
 
                 foreach (var fireTank in FireTanks)
                     fireTank.Fire();
 
-                for (int i = 1; i < tanks.Count; i++)
+                for (int i = 0; i < _tanks.Count; i++)
                 {
                     if (
-                        (Tile.X - tanks[i].X) < 19 &&
-                        (Tile.Y - tanks[i].Y) < 19 &&
-                        (Tile.X - tanks[i].X) > -9 &&
-                        (Tile.Y - tanks[i].Y) > -9
+                        (Tile.X - _tanks[i].X) < 19 &&
+                        (Tile.Y - _tanks[i].Y) < 19 &&
+                        (Tile.X - _tanks[i].X) > -9 &&
+                        (Tile.Y - _tanks[i].Y) > -9
                         )
                     {
-                        FireTanks.Add(new FireTank(tanks[i].X, tanks[i].Y));
-                        tanks.RemoveAt(i);
+                        if (i != 0 || abilitKillHunter)
+                        {
+                            FireTanks.Add(new FireTank(_tanks[i].X, _tanks[i].Y));
+                            _tanks.RemoveAt(i);
+                        }
                         Tile.DefaultSettings();
                     }
                 }
 
-                for (int i = 0; i < tanks.Count; i++)
+                for (int i = 0; i < _tanks.Count; i++)
                 {
-                    for (int j = i + 1; j < tanks.Count; j++)
+                    for (int j = i + 1; j < _tanks.Count; j++)
                         if (
-                            (Math.Abs(tanks[i].X - tanks[j].X) <= 20 && (tanks[i].Y == tanks[j].Y))
+                            (Math.Abs(_tanks[i].X - _tanks[j].X) <= 20 && (_tanks[i].Y == _tanks[j].Y))
                             ||
-                            (Math.Abs(tanks[i].Y - tanks[j].Y) <= 20 && (tanks[i].X == tanks[j].X))
+                            (Math.Abs(_tanks[i].Y - _tanks[j].Y) <= 20 && (_tanks[i].X == _tanks[j].X))
                             ||
-                            (Math.Abs(tanks[i].X - tanks[j].X) <= 20 && Math.Abs(tanks[i].Y - tanks[j].Y) <= 20)
+                            (Math.Abs(_tanks[i].X - _tanks[j].X) <= 20 && Math.Abs(_tanks[i].Y - _tanks[j].Y) <= 20)
                             ) 
                         {
-                            if (i == 0)
-                                ((Hunter) tanks[i]).TurnAround();
+                            if (i == 0 && _tanks[i] is Hunter)
+                                ((Hunter) _tanks[i]).TurnAround();
                             else
-                                tanks[i].TurnAround();
+                                _tanks[i].TurnAround();
                         
-                            tanks[j].TurnAround();
+                            _tanks[j].TurnAround();
                         }
                 }
 
                 for (int i = 0; i < Tanks.Count; i++)
                 {
                     if (
-                        (Math.Abs(tanks[i].X - Pacman.X) <= 19 && (tanks[i].Y == Pacman.Y))
+                        (Math.Abs(_tanks[i].X - Pacman.X) <= 19 && (_tanks[i].Y == Pacman.Y))
                         ||
-                        (Math.Abs(tanks[i].Y - Pacman.Y) <= 19 && (tanks[i].X == Pacman.X))
+                        (Math.Abs(_tanks[i].Y - Pacman.Y) <= 19 && (_tanks[i].X == Pacman.X))
                         ||
-                        (Math.Abs(tanks[i].X - Pacman.X) <= 19 && Math.Abs(tanks[i].Y - Pacman.Y) <= 19)
+                        (Math.Abs(_tanks[i].X - Pacman.X) <= 19 && Math.Abs(_tanks[i].Y - Pacman.Y) <= 19)
                         )
                     {
-                        gameStatus = GameStatus.Looser;
+                        GameStatus = GameStatus.Looser;
+                        if (ChangeStreep != null)
+                            ChangeStreep();
                     }
                 }
 
@@ -156,18 +159,40 @@ namespace Tanks
                     {
                         if (Math.Abs(Pacman.X - Apples[z].X) < 3 && Math.Abs(Pacman.Y - Apples[z].Y) < 3)
                         {
-                            Apples[z] = new Apple(step += 30, 280);
-                            collectedApples++;
-                            CreateApples(collectedApples);
+                            Apples[z] = new Apple(_step += 30, 280);
+                            _collectedApples++;
+                            CreateApples(_collectedApples);
                         }
                     }
-                if (collectedApples > 4)
+                if (_collectedApples > 4)
                 {
-                    gameStatus = GameStatus.Winner;
+                    GameStatus = GameStatus.Winner;
+                    if (ChangeStreep != null)
+                        ChangeStreep();
                 }
             }
         }
 
-        private int step = -30;
+        private int _step;
+
+        internal void NewGame()
+        {
+            _collectedApples = 0;
+            _step = -30;
+
+            Tile = new ProjectTile();
+            Pacman = new Pacman(_sizeField);
+            _tanks = new List<Tank>();
+            FireTanks = new List<FireTank>();
+            Apples = new List<Apple>();
+
+            CreateTanks();
+            CreateApples();
+            wall = new Wall();
+
+            GameStatus = GameStatus.Stoping;
+            if (ChangeStreep != null)
+                ChangeStreep();
+        }
     }
 }

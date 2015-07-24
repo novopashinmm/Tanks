@@ -121,7 +121,7 @@
   <data name="StartStop_pcbx.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAHIAAAB3CAYAAADfEBTOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAADLESURBVHhexd0F1GTbUbfxyU2Ce3ANELi4a5AgAUKA4O7u
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAADLESURBVHhexd0F1GTbUbfxyU2Ce3ANELi4a5AgAUKA4O7u
         7i4JhOAEt+AEd3d3d3d3d+jv/s6aZ1bNntMycy/5zlp13/ftPr3PPvXUv6r27u65V+44DpfY3e52t+vs
         tttuu87ufve7b3aPe9zjmt3znve8Zo/2aI+22aM/+qNv9hiP8RjX7DEf8zE3e6zHeqzNHvuxH/uaPc7j
         PM5mj/u4j3udPd7jPd7h8R//8Q9P8ARPcM2e8AmfcLMneqInusg6f45hTGOzrtUcsubWfJs/cz/dY+a+
@@ -343,6 +343,12 @@
   </data>
   <metadata name="Help_ttip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
+  </metadata>
+  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>113, 17</value>
+  </metadata>
+  <metadata name="statusStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>222, 17</value>
   </metadata>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
