@@ -11,21 +11,21 @@ namespace Tanks
         HunterImg hunterImg = new HunterImg();
         private void PutImg()
         {
-            if (direct_x == 1)
-                img = hunterImg.Right;
-            if (direct_x == -1)
-                img = hunterImg.Left;
-            if (direct_y == 1)
-                img = hunterImg.Down;
-            if (direct_y == -1)
-                img = hunterImg.Up;
+            if (DirectX == 1)
+                Img = hunterImg.Right;
+            if (DirectX == -1)
+                Img = hunterImg.Left;
+            if (DirectY == 1)
+                Img = hunterImg.Down;
+            if (DirectY == -1)
+                Img = hunterImg.Up;
         }
 
         public void Run(int target_x, int target_y)
         {
-            x += direct_x;
-            y += direct_y;
-            if (Math.IEEERemainder(x, 40) == 0 && Math.IEEERemainder(y, 40) == 0)
+            X = X + DirectX;
+            Y = Y + DirectY;
+            if (Math.IEEERemainder(X, 40) == 0 && Math.IEEERemainder(Y, 40) == 0)
                 Turn(target_x, target_y);
 
             PutCurrentImage();
@@ -46,7 +46,7 @@ namespace Tanks
                 DirectY = 1;
 
             if (DirectX != 0 && DirectY != 0)
-                if (r.Next(5000) < 2500)
+                if (R.Next(5000) < 2500)
                     DirectX = 0;
                 else 
                     DirectY = 0;

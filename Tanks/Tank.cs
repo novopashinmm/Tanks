@@ -7,86 +7,90 @@ namespace Tanks
     {
         private void PutImg()
         {
-            if (direct_x == 1)
-                img = tankImg.Right;
-            if (direct_x == -1)
-                img = tankImg.Left;
-            if (direct_y == 1)
-                img = tankImg.Down;
-            if (direct_y == -1)
-                img = tankImg.Up;
+            if (_directX == 1)
+                Img = _tankImg.Right;
+            if (_directX == -1)
+                Img = _tankImg.Left;
+            if (_directY == 1)
+                Img = _tankImg.Down;
+            if (_directY == -1)
+                Img = _tankImg.Up;
         }
-        private TankImg tankImg = new TankImg();
+        private readonly TankImg _tankImg = new TankImg();
         
-        protected Image[] img;
-        protected Image currentImg;
-        protected int x, y;
-        protected int direct_x;
-        protected int direct_y;
-        protected int sizeField;
-        protected int k;
+        protected Image[] Img;
+        private Image _currentImg;
+        private int _x;
+        private int _y;
+        private int _directX;
+        private int _directY;
+        protected int SizeField { get; set; }
+        protected int K { get; set; }
+
         protected void PutCurrentImage()
         {
-            currentImg = img[k];
-            k++;
-            if (k == 4) k = 0;
+            _currentImg = Img[K];
+            K++;
+            if (K == 4) K = 0;
         }
-        protected static Random r;
+        protected static Random R;
         
         public Tank(int sizeField, int x, int y)
         {
-            r = new Random();
-            DirectX = r.Next(-1, 2);
+            R = new Random();
+            DirectX = R.Next(-1, 2);
             if (DirectX == 0)
                 while (DirectY == 0)
-                    DirectY = r.Next(-1, 2);
+                    DirectY = R.Next(-1, 2);
             else
                 DirectY = 0;
             PutImg();
             PutCurrentImage();
-            this.x = x;
-            this.y = y;
-            this.sizeField = sizeField;
+            _x = x;
+            _y = y;
+            SizeField = sizeField;
         }
         public int X
         {
-            get { return x; }
+            get { return _x; }
+            set { _x = value; }
         }
         public int Y
         {
-            get { return y; }
+            get { return _y; }
+            set { _y = value; }
         }
         public int DirectX
         {
-            get { return direct_x; }
+            get { return _directX; }
             set
             {
                 if (value == 0 || value == -1 || value == 1)
-                    direct_x = value;
+                    _directX = value;
                 else
-                    direct_x = 0;
+                    _directX = 0;
             }
         }
         public int DirectY
         {
-            get { return direct_y; }
+            get { return _directY; }
             set
             {
                 if (value == 0 || value == -1 || value == 1)
-                    direct_y = value;
+                    _directY = value;
                 else
-                    direct_y = 0;
+                    _directY = 0;
             }
         }
         public Image CurrentImg
         {
-            get { return currentImg; }
+            get { return _currentImg; }
         }
         public void Run()
         {
-            x += direct_x;
-            y += direct_y;
-            if (Math.IEEERemainder(x, 40) == 0 && Math.IEEERemainder(y, 40) == 0)
+            _x += _directX;
+            _y += _directY;
+            if (Math.IEEERemainder(_x, 40) == 0 && Math.IEEERemainder(_y, 40) == 0)
                 Turn();
 
             PutCurrentImage();
@@ -95,13 +99,13 @@ namespace Tanks
         }
         public void Turn()
         {
-            if (r.Next(5000) < 2500) // двигаемся далее по вертикали
+            if (R.Next(5000) < 2500) // двигаемся далее по вертикали
             {
                 if (DirectY == 0)
                 {
-                    direct_x = 0;
+                    _directX = 0;
                     while (DirectY == 0)
-                        DirectY = r.Next(-1, 2);
+                        DirectY = R.Next(-1, 2);
                 }
             }
             else // двигаемся по горизонтали
@@ -110,21 +114,21 @@ namespace Tanks
                 {
                     DirectY = 0;
                     while (DirectX == 0)
-                        DirectX = r.Next(-1, 2);
+                        DirectX = R.Next(-1, 2);
                 }
             }
             PutImg();
         }
         public void Transparent()
         {
-            if (x == -1)
-                x = sizeField - 21;
-            if (x == sizeField - 19)
-                x = 1;
-            if (y == -1)
-                y = sizeField - 21;
-            if (y == sizeField - 19)
-                y = 1;
+            if (_x == -1)
+                _x = SizeField - 21;
+            if (_x == SizeField - 19)
+                _x = 1;
+            if (_y == -1)
+                _y = SizeField - 21;
+            if (_y == SizeField - 19)
+                _y = 1;
         }
         public void TurnAround()
         {
