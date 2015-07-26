@@ -5,13 +5,13 @@ using System.Threading;
 
 namespace Tanks
 {
-    public delegate void Streep();
+    public delegate void Streep(object sender, EventArgs e);
     public class Model
     {
         public event Streep ChangeStreep;
-        public GameStatus GameStatus;
+        public GameStatus Status { get; set; }
 
-        
+
         private readonly int _sizeField;
         private readonly int _amountTanks;
         private readonly int _amountApple;
@@ -24,8 +24,8 @@ namespace Tanks
         public int SpeedGame { get; private set; }
         public ProjectTile Tile { get; private set; }
         public Pacman Pacman { get; private set; }
-        public List<FireTank> FireTanks { get; private set; }
-        public List<Apple> Apples { get; private set; }
+        public ICollection<FireTank> FireTanks { get; private set; }
+        public ICollection<Apple> Apples { get; private set; }
         
         public Model(int sizeField, int amountTanks, int amountApple, int speedGame)
         {
@@ -76,7 +76,7 @@ namespace Tanks
         
         public void Play()
         {
-            while (GameStatus == GameStatus.Playing)
+            while (Status == GameStatus.Playing)
             {
                 Thread.Sleep(SpeedGame);
                 RunAllObjectOnField();
@@ -87,9 +87,9 @@ namespace Tanks
 
                 if (_collectedApples > 4)
                 {
-                    GameStatus = GameStatus.Winner;
+                    Status = GameStatus.Winner;
                     if (ChangeStreep != null)
-                        ChangeStreep();
+                        ChangeStreep(this, null);
                 }
             }
         }
@@ -116,9 +116,9 @@ namespace Tanks
         {
             for (int z = 0; z < Apples.Count; z++)
             {
-                if (Math.Abs(Pacman.X - Apples[z].X) < 3 && Math.Abs(Pacman.Y - Apples[z].Y) < 3)
+                if (Math.Abs(Pacman.X - Apples.ToArray()[z].X) < 3 && Math.Abs(Pacman.Y - Apples.ToArray()[z].Y) < 3)
                 {
-                    Apples[z] = new Apple(_step += 30, 280);
+                    Apples.ToArray()[z] = new Apple(_step += 30, 280);
                     _collectedApples++;
                     CreateApples(_collectedApples);
                 }
@@ -137,9 +137,9 @@ namespace Tanks
                     (Math.Abs(_tanks[i].X - Pacman.X) <= 19 && Math.Abs(_tanks[i].Y - Pacman.Y) <= 19)
                     )
                 {
-                    GameStatus = GameStatus.Looser;
+                    Status = GameStatus.Looser;
                     if (ChangeStreep != null)
-                        ChangeStreep();
+                        ChangeStreep(this, null);
                 }
             }
         }
@@ -203,9 +203,9 @@ namespace Tanks
             CreateApples();
             Wall = new Wall();
 
-            GameStatus = GameStatus.Stoping;
+            Status = GameStatus.Stoping;
             if (ChangeStreep != null)
-                ChangeStreep();
+                ChangeStreep(this, null);
         }
     }
 }

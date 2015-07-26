@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Windows.Forms;
 using Tanks.Properties;
 using System.Media;
@@ -44,17 +45,17 @@ namespace Tanks
             _isSound = true;
         }
 
-        void ChangerStatusStripLbl()
+        void ChangerStatusStripLbl(object sender, EventArgs e)
         {
             Invoke(new Invoker(SetValueToStrLbl));
         }
 
         private void SetValueToStrLbl()
         {
-            GameStatus_lbl_ststrp.Text = _model.GameStatus.ToString();
+            GameStatus_lbl_ststrp.Text = _model.Status.ToString();
             if (_isSound)
             {
-                if (_model.GameStatus == GameStatus.Playing)
+                if (_model.Status == GameStatus.Playing)
                     _sp.PlayLooping();
                 else
                     _sp.Stop();
@@ -65,22 +66,22 @@ namespace Tanks
             }
         }
 
-        private void StartPause_btn_Click(object sender, System.EventArgs e)
+        private void StartPause_btn_Click(object sender, EventArgs e)
         {
-            if (_model.GameStatus == GameStatus.Playing)
+            if (_model.Status == GameStatus.Playing)
             {
                 StartStop_pcbx.Focus();
                 _modelPlay.Abort();
-                _model.GameStatus = GameStatus.Stoping;
-                ChangerStatusStripLbl();
+                _model.Status = GameStatus.Stoping;
+                ChangerStatusStripLbl(this, null);
             }
             else
             {
                 StartStop_pcbx.Focus();
-                _model.GameStatus = GameStatus.Playing;
+                _model.Status = GameStatus.Playing;
                 _modelPlay = new Thread(_model.Play);
                 _modelPlay.Start();
-                ChangerStatusStripLbl();
+                ChangerStatusStripLbl(this, null);
                 _view.Invalidate();
             }
         }
@@ -89,7 +90,7 @@ namespace Tanks
         {
             if (_modelPlay != null)
             {
-                _model.GameStatus = GameStatus.Stoping;
+                _model.Status = GameStatus.Stoping;
                 _modelPlay.Abort();
             }
             if (Resources.ControllerMainForm_ControllerMainForm_FormClosing_Вы_уверены_ != null)
@@ -152,28 +153,28 @@ namespace Tanks
             }
         }
 
-        private void infoToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void infoToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void exitToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void newGameToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void newGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _model.NewGame();
             _view.Refresh();
         }
 
-        private void AboutToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(infoAboutMe, Resources.ControllerMainForm_ControllerMainForm_FormClosing_Tanks, MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
         }
 
-        private void SoundToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void SoundToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _isSound = !_isSound;
             soundToolStripMenuItem.Image = _isSound ? Resources.Ok : Resources.NotOk;

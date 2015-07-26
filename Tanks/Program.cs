@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace Tanks
 {
@@ -21,16 +22,16 @@ namespace Tanks
                     cm = new ControllerMainForm();
                     break;
                 case 1:
-                    cm = new ControllerMainForm(Convert.ToInt32(arg[0]));
+                    cm = new ControllerMainForm(Convert.ToInt32(arg[0], new CultureInfo("En", true)));
                     break;
                 case 2:
-                    cm = new ControllerMainForm(Convert.ToInt32(arg[0]), Convert.ToInt32(arg[1]));
+                    cm = new ControllerMainForm(Convert.ToInt32(arg[0], new CultureInfo("En", true)), Convert.ToInt32(arg[1], new CultureInfo("En", true)));
                     break;
                 case 3:
-                    cm = new ControllerMainForm(Convert.ToInt32(arg[0]), Convert.ToInt32(arg[1]), Convert.ToInt32(arg[2]));
+                    cm = new ControllerMainForm(Convert.ToInt32(arg[0], new CultureInfo("En", true)), Convert.ToInt32(arg[1], new CultureInfo("En", true)), Convert.ToInt32(arg[2], new CultureInfo("En", true)));
                     break;
                 case 4:
-                    cm = new ControllerMainForm(Convert.ToInt32(arg[0]), Convert.ToInt32(arg[1]), Convert.ToInt32(arg[2]), Convert.ToInt32(arg[3]));
+                    cm = new ControllerMainForm(Convert.ToInt32(arg[0], new CultureInfo("En", true)), Convert.ToInt32(arg[1], new CultureInfo("En", true)), Convert.ToInt32(arg[2], new CultureInfo("En", true)), Convert.ToInt32(arg[3], new CultureInfo("En", true)));
                     break;
                 default: cm = new ControllerMainForm(); break;
             }

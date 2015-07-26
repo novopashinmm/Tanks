@@ -30,7 +30,7 @@ namespace Tanks
             DrawPacman(e);
             DrawProjectTile(e);
 
-            if (model.GameStatus != GameStatus.Playing)
+            if (model.Status != GameStatus.Playing)
                 return;
 
             Thread.Sleep(model.SpeedGame);
@@ -65,7 +65,7 @@ namespace Tanks
         {
             for (int i = 0; i < model.Apples.Count; i++)
             {
-                e.Graphics.DrawImage(model.Apples[i].Img, new Point(model.Apples[i].X, model.Apples[i].Y));
+                e.Graphics.DrawImage(model.Apples.ToArray()[i].Img, new Point(model.Apples.ToArray()[i].X, model.Apples.ToArray()[i].Y));
             }
         }
 

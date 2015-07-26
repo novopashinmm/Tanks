@@ -17,8 +17,8 @@ namespace Tanks
                 Img = _tankImg.Up;
         }
         private readonly TankImg _tankImg = new TankImg();
-        
-        protected Image[] Img;
+
+        public Image[] Img { get; protected set; }
         private Image _currentImg;
         private int _x;
         private int _y;
