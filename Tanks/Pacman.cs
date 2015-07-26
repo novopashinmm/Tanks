@@ -1,83 +1,79 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tanks
 {
     public class Pacman : IRun, ITurn, ITransparent, ICurrentPicture
     {
-        PacmanImg pacmanImg = new PacmanImg();
-        private Image[] img;
-        private Image currentImage;
-        private int sizeField;
-        private int direct_x;
-        private int direct_y;
+        readonly PacmanImg _pacmanImg = new PacmanImg();
+        private Image[] _img;
+        private Image _currentImage;
+        private readonly int _sizeField;
+        private int _directX;
+        private int _directY;
         public int NextDirectX { get; set; }
         public int NextDirectY { get; set; }
-        private int x, y;
+        private int _x, _y;
 
         public int X
         {
-            get { return x; }
+            get { return _x; }
         }
 
         public int Y
         {
-            get { return y; }
+            get { return _y; }
         }
 
         public Image CurrentImg
         {
-            get { return currentImage; }
+            get { return _currentImage; }
         }
 
         public int DirectX
         {
-            get { return direct_x; }
+            get { return _directX; }
             set
             {
                 if (value == 0 || value == -1 || value == 1)
-                    direct_x = value;
+                    _directX = value;
                 else
-                    direct_x = 0;
+                    _directX = 0;
             }
         }
 
         public int DirectY
         {
-            get { return direct_y; }
+            get { return _directY; }
             set
             {
                 if (value == 0 || value == -1 || value == 1)
-                    direct_y = value;
+                    _directY = value;
                 else
-                    direct_y = 0;
+                    _directY = 0;
             }
         }
 
         public Pacman(int sizeField)
         {
-            this.sizeField = sizeField;
-            this.x = 120;
-            this.y = 240;
-            this.NextDirectX = 0;
-            this.NextDirectY = -1;
-            this.DirectX = 0;
-            this.DirectY = -1;
+            _sizeField = sizeField;
+            _x = 120;
+            _y = 240;
+            NextDirectX = 0;
+            NextDirectY = -1;
+            DirectX = 0;
+            DirectY = -1;
             PutImg();
             PutCurrentImage();
             
-            this.sizeField = sizeField;
+            _sizeField = sizeField;
         }
 
         public void Run()
         {
-            x += direct_x;
-            y += direct_y;
-            if (Math.IEEERemainder(x, 40) == 0 && Math.IEEERemainder(y, 40) == 0)
+            _x += _directX;
+            _y += _directY;
+            if (Math.IEEERemainder(_x, 40) == 0 && Math.IEEERemainder(_y, 40) == 0)
                 Turn();
 
             PutCurrentImage();
@@ -86,12 +82,12 @@ namespace Tanks
         }
 
 
-        private int k;
+        private int _k;
         private void PutCurrentImage()
         {
-            currentImage = img[k];
-            k++;
-            if (k == 4) k = 0;
+            _currentImage = _img[_k];
+            _k++;
+            if (_k == 4) _k = 0;
         }
 
 
@@ -105,28 +101,28 @@ namespace Tanks
 
         public void Transparent()
         {
-            if (x == -1)
-                x = sizeField - 21;
-            if (x == sizeField - 19)
-                x = 1;
+            if (_x == -1)
+                _x = _sizeField - 21;
+            if (_x == _sizeField - 19)
+                _x = 1;
 
-            if (y == -1)
-                y = sizeField - 21;
-            if (y == sizeField - 19)
-                y = 1;
+            if (_y == -1)
+                _y = _sizeField - 21;
+            if (_y == _sizeField - 19)
+                _y = 1;
         }
 
 
         public void PutImg()
         {
-            if (direct_x == 1)
-                img = pacmanImg.Right;
-            if (direct_x == -1)
-                img = pacmanImg.Left;
-            if (direct_y == 1)
-                img = pacmanImg.Down;
-            if (direct_y == -1)
-                img = pacmanImg.Up;
+            if (_directX == 1)
+                _img = _pacmanImg.Right;
+            if (_directX == -1)
+                _img = _pacmanImg.Left;
+            if (_directY == 1)
+                _img = _pacmanImg.Down;
+            if (_directY == -1)
+                _img = _pacmanImg.Up;
         }
     }
 }

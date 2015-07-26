@@ -1,44 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
+using Tanks.Properties;
 
 namespace Tanks
 {
     class HunterImg
     {
-        private Image[] _up =
+        private readonly Image[] _up =
         {
-            Properties.Resources.Hunter01I, 
-            Properties.Resources.Hunter0_1II, 
-            Properties.Resources.Hunter0_1III,
-            Properties.Resources.Hunter0_1IV
+            Resources.Hunter01I, 
+            Resources.Hunter0_1II, 
+            Resources.Hunter0_1III,
+            Resources.Hunter0_1IV
         };
 
-        private Image[] _down =
+        private readonly Image[] _down =
         {
-            Properties.Resources.Hunter01I, 
-            Properties.Resources.Hunter01II, 
-            Properties.Resources.Hunter01III,
-            Properties.Resources.Hunter01IV
+            Resources.Hunter01I, 
+            Resources.Hunter01II, 
+            Resources.Hunter01III,
+            Resources.Hunter01IV
         };
 
-        private Image[] _left =
+        private readonly Image[] _left =
         {
-            Properties.Resources.Hunter_10I, 
-            Properties.Resources.Hunter_10II, 
-            Properties.Resources.Hunter_10III,
-            Properties.Resources.Hunter_10IV
+            Resources.Hunter_10I, 
+            Resources.Hunter_10II, 
+            Resources.Hunter_10III,
+            Resources.Hunter_10IV
         };
 
-        private Image[] _right =
+        private readonly Image[] _right =
         {
-            Properties.Resources.Hunter10I, 
-            Properties.Resources.Hunter10II, 
-            Properties.Resources.Hunter10III,
-            Properties.Resources.Hunter10IV
+            Resources.Hunter10I, 
+            Resources.Hunter10II, 
+            Resources.Hunter10III,
+            Resources.Hunter10IV
         };
 
         public Image[] Up

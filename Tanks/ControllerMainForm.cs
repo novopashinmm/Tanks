@@ -12,7 +12,7 @@ namespace Tanks
         private readonly Model _model;
         private bool _isSound;
         private Thread _modelPlay;
-        private SoundPlayer sp;
+        private readonly SoundPlayer _sp;
         private readonly string infoAboutMe = "Игра \"Пакмен\" версии 1.0\n" +
                             "Разработчик Новопашин Михаил\n" +
                             "Для управления используйте w,s,a,d и выстрел f";
@@ -39,7 +39,7 @@ namespace Tanks
             _view = new View(_model);
             Controls.Add(_view);
 
-            sp = new SoundPlayer(Properties.Resources.AudioTanks);
+            _sp = new SoundPlayer(Resources.AudioTanks);
 
             _isSound = true;
         }
@@ -55,13 +55,13 @@ namespace Tanks
             if (_isSound)
             {
                 if (_model.GameStatus == GameStatus.Playing)
-                    sp.PlayLooping();
+                    _sp.PlayLooping();
                 else
-                    sp.Stop();
+                    _sp.Stop();
             }
             else
             {
-                sp.Stop();
+                _sp.Stop();
             }
         }
 
@@ -94,7 +94,7 @@ namespace Tanks
             }
             if (Resources.ControllerMainForm_ControllerMainForm_FormClosing_Вы_уверены_ != null)
             {
-                DialogResult dr = MessageBox.Show(text: Resources.ControllerMainForm_ControllerMainForm_FormClosing_Вы_уверены_, caption: "Tanks", buttons: MessageBoxButtons.YesNo);
+                DialogResult dr = MessageBox.Show(text: Resources.ControllerMainForm_ControllerMainForm_FormClosing_Вы_уверены_, caption: Resources.ControllerMainForm_ControllerMainForm_FormClosing_Tanks, buttons: MessageBoxButtons.YesNo);
                 e.Cancel = dr != DialogResult.Yes;
             }
         }
@@ -170,16 +170,13 @@ namespace Tanks
 
         private void AboutToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            MessageBox.Show(infoAboutMe, "Tanks");
+            MessageBox.Show(infoAboutMe, Resources.ControllerMainForm_ControllerMainForm_FormClosing_Tanks);
         }
 
         private void SoundToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             _isSound = !_isSound;
-            if (_isSound)
-                soundToolStripMenuItem.Image = Resources.Ok;
-            else
-                soundToolStripMenuItem.Image = Resources.NotOk;
+            soundToolStripMenuItem.Image = _isSound ? Resources.Ok : Resources.NotOk;
         }
     }
 }

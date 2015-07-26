@@ -1,44 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
+using Tanks.Properties;
 
 namespace Tanks
 {
     public class TankImg
     {
-        private Image[] _up =
+        private readonly Image[] _up =
         {
-            Properties.Resources.Tank0_1I, 
-            Properties.Resources.Tank0_1II, 
-            Properties.Resources.Tank0_1III,
-            Properties.Resources.Tank0_1IV
+            Resources.Tank0_1I, 
+            Resources.Tank0_1II, 
+            Resources.Tank0_1III,
+            Resources.Tank0_1IV
         };
 
-        private Image[] _down =
+        private readonly Image[] _down =
         {
-            Properties.Resources.Tank01I, 
-            Properties.Resources.Tank01II, 
-            Properties.Resources.Tank01III,
-            Properties.Resources.Tank01IV
+            Resources.Tank01I, 
+            Resources.Tank01II, 
+            Resources.Tank01III,
+            Resources.Tank01IV
         };
 
-        private Image[] _left =
+        private readonly Image[] _left =
         {
-            Properties.Resources.Tank_10I, 
-            Properties.Resources.Tank_10II, 
-            Properties.Resources.Tank_10III,
-            Properties.Resources.Tank_10IV
+            Resources.Tank_10I, 
+            Resources.Tank_10II, 
+            Resources.Tank_10III,
+            Resources.Tank_10IV
         };
 
-        private Image[] _right =
+        private readonly Image[] _right =
         {
-            Properties.Resources.Tank10I, 
-            Properties.Resources.Tank10II, 
-            Properties.Resources.Tank10III,
-            Properties.Resources.Tank10IV
+            Resources.Tank10I, 
+            Resources.Tank10II, 
+            Resources.Tank10III,
+            Resources.Tank10IV
         };
 
         public Image[] Up

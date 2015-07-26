@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
+using Tanks.Properties;
 
 namespace Tanks
 {
     public class ProjectTileImg
     {
-        private Image _projectTileImage = Properties.Resources.Tile;
+        private readonly Image _projectTileImage = Resources.Tile;
 
         public Image ProjectTileImage
         {

@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
+using Tanks.Properties;
 
 namespace Tanks
 {
     class FireTankImage
     {
-        private Image img = Properties.Resources.FireTank;
+        private readonly Image _img = Resources.FireTank;
 
         public Image Img
         {
-            get { return img; }
+            get { return _img; }
         }
     }
 }

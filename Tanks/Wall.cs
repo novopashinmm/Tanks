@@ -1,26 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Tanks
 {
     public class Wall : IPicture
     {
-        WallImg wallImg = new WallImg();
+        readonly WallImg _wallImg = new WallImg();
 
-        private Image img;
+        private readonly Image _img;
 
         public Wall()
         {
-            img = wallImg.Img;
+            _img = _wallImg.Img;
         }
 
         public Image Img
         {
-            get { return img; }
+            get { return _img; }
         }
     }
 }

@@ -80,6 +80,15 @@ namespace Tanks.Properties {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Tanks.
+        /// </summary>
+        internal static string ControllerMainForm_ControllerMainForm_FormClosing_Tanks {
+            get {
+                return ResourceManager.GetString("ControllerMainForm_ControllerMainForm_FormClosing_Tanks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Вы уверены?.
         /// </summary>
         internal static string ControllerMainForm_ControllerMainForm_FormClosing_Вы_уверены_ {

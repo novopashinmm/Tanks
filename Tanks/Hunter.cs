@@ -1,48 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Tanks
 {
     class Hunter : Tank
     {
-        HunterImg hunterImg = new HunterImg();
+        readonly HunterImg _hunterImg = new HunterImg();
         private void PutImg()
         {
             if (DirectX == 1)
-                Img = hunterImg.Right;
+                Img = _hunterImg.Right;
             if (DirectX == -1)
-                Img = hunterImg.Left;
+                Img = _hunterImg.Left;
             if (DirectY == 1)
-                Img = hunterImg.Down;
+                Img = _hunterImg.Down;
             if (DirectY == -1)
-                Img = hunterImg.Up;
+                Img = _hunterImg.Up;
         }
 
-        public void Run(int target_x, int target_y)
+        public void Run(int targetX, int targetY)
         {
             X = X + DirectX;
             Y = Y + DirectY;
-            if (Math.IEEERemainder(X, 40) == 0 && Math.IEEERemainder(Y, 40) == 0)
-                Turn(target_x, target_y);
+            if (System.Math.IEEERemainder(X, 40) == 0 && Math.IEEERemainder(Y, 40) == 0)
+                Turn(targetX, targetY);
 
             PutCurrentImage();
 
             Transparent();
         }
 
-        public void Turn(int target_x, int target_y)
+        public void Turn(int targetX, int targetY)
         {
             DirectX = DirectY = 0;
-            if (X > target_x)
+            if (X > targetX)
                 DirectX = -1;
-            if (X < target_x)
+            if (X < targetX)
                 DirectX = 1;
-            if (Y > target_y)
+            if (Y > targetY)
                 DirectY = -1;
-            if (Y < target_y)
+            if (Y < targetY)
                 DirectY = 1;
 
             if (DirectX != 0 && DirectY != 0)

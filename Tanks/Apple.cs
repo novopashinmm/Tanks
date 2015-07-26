@@ -7,20 +7,20 @@ namespace Tanks
         public int X { get; private set; }
         public int Y { get; private set; }
 
-        AppleImg appleImg = new AppleImg();
+        readonly AppleImg _appleImg = new AppleImg();
 
-            private Image img;
+            private readonly Image _img;
 
             public Apple(int x, int y)
             {
-                img = appleImg.Img;
+                _img = _appleImg.Img;
                 X = x;
                 Y = y;
             }
 
             public Image Img
             {
-                get { return img; }
+                get { return _img; }
             }
     }
 }

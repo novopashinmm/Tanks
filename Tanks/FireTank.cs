@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Tanks
 {
     public class FireTank
     {
-        FireTankImage ftImg = new FireTankImage();
+        readonly FireTankImage _ftImg = new FireTankImage();
         public Image CurrenImage { get; private set; }
 
-        private Image img;
+        private readonly Image _img;
 
         public int X { get; private set; }
         public int Y { get; private set; }
@@ -21,7 +16,7 @@ namespace Tanks
         {
             X = x;
             Y = y;
-            img = ftImg.Img;
+            _img = _ftImg.Img;
             PutCurrentImage();
         }
 
@@ -32,7 +27,7 @@ namespace Tanks
 
         protected void PutCurrentImage()
         {
-            CurrenImage = img;
+            CurrenImage = _img;
         }
     }
 }

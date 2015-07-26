@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Tanks
 {
     public class ProjectTile
     {
-        private int km;
-        private ProjectTileImg projectTileImg = new ProjectTileImg();
+        private int _km;
+        private readonly ProjectTileImg _projectTileImg = new ProjectTileImg();
         public Image Img { get; private set; }
 
-        private int direct_x, direct_y;
+        private int _directX, _directY;
         public int X { get; set; }
         public int Y { get; set; }
 
         public ProjectTile()
         {
-            Img = projectTileImg.ProjectTileImage;
+            Img = _projectTileImg.ProjectTileImage;
             DefaultSettings();
         }
 
@@ -27,28 +22,28 @@ namespace Tanks
         {
             X = Y = -10;
             DirectX = DirectY = 0;
-            km = 0;
+            _km = 0;
         }
         public int DirectX
         {
-            get { return direct_x; }
+            get { return _directX; }
             set
             {
                 if (value == 0 || value == -1 || value == 1)
-                    direct_x = value;
+                    _directX = value;
                 else
-                    direct_x = 0;
+                    _directX = 0;
             }
         }
         public int DirectY
         {
-            get { return direct_y; }
+            get { return _directY; }
             set
             {
                 if (value == 0 || value == -1 || value == 1)
-                    direct_y = value;
+                    _directY = value;
                 else
-                    direct_y = 0;
+                    _directY = 0;
             }
         }
 
@@ -56,17 +51,17 @@ namespace Tanks
         {
             if (DirectX == 0 && DirectY == 0)
                 return;
-            km += 4;
+            _km += 4;
             PutImg();
             X += DirectX * 4;
             Y += DirectY * 4;
-            if (km > 140)
+            if (_km > 140)
                 DefaultSettings();
         }
 
         private void PutImg()
         {
-            Img = projectTileImg.ProjectTileImage;
+            Img = _projectTileImg.ProjectTileImage;
         }
     }
 }

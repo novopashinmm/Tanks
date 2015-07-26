@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
+using Tanks.Properties;
 
 namespace Tanks
 {
     class AppleImg
     {
-        private Image img = Properties.Resources.Apple;
+        private readonly Image _img = Resources.Apple;
 
         public Image Img
         {
-            get { return img; }
+            get { return _img; }
         }
     }
 }
