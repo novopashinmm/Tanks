@@ -1,4 +1,7 @@
-﻿namespace Tanks
+﻿using System;
+
+[assembly: CLSCompliant(true)]
+namespace Tanks
 {
     partial class ControllerMainForm
     {
@@ -120,8 +123,9 @@
             // 
             // soundToolStripMenuItem
             // 
+            this.soundToolStripMenuItem.Image = global::Tanks.Properties.Resources.Ok;
             this.soundToolStripMenuItem.Name = "soundToolStripMenuItem";
-            this.soundToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.soundToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.soundToolStripMenuItem.Text = "&Sound";
             this.soundToolStripMenuItem.Click += new System.EventHandler(this.SoundToolStripMenuItem_Click);
             // 
@@ -175,7 +179,6 @@
             this.Text = "Tanks";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ControllerMainForm_FormClosing);
             this.Click += new System.EventHandler(this.StartPause_btn_Click);
-            this.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.ControllerMainForm_PreviewKeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.StartStop_pcbx)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

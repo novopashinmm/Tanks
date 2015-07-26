@@ -71,6 +71,15 @@ namespace Tanks.Properties {
         }
         
         /// <summary>
+        ///   Поиск локализованного ресурса типа System.IO.UnmanagedMemoryStream, аналогичного System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream AudioTanks {
+            get {
+                return ResourceManager.GetStream("AudioTanks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Вы уверены?.
         /// </summary>
         internal static string ControllerMainForm_ControllerMainForm_FormClosing_Вы_уверены_ {
@@ -256,6 +265,26 @@ namespace Tanks.Properties {
             get {
                 object obj = ResourceManager.GetObject("MainIcon", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NotOk {
+            get {
+                object obj = ResourceManager.GetObject("NotOk", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Ok {
+            get {
+                object obj = ResourceManager.GetObject("Ok", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
             }
         }
         

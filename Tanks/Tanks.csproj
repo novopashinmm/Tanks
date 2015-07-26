@@ -32,6 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>TanksKeyForAssembly.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -96,6 +102,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View.resx">
       <DependentUpon>View.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
@@ -107,6 +114,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="TanksKeyForAssembly.pfx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -119,6 +127,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\FireTank.bmp" />
+    <None Include="Resources\AudioTanks.wav" />
+    <None Include="Resources\FireTank1.bmp" />
+    <None Include="Resources\FireTank11.bmp" />
     <Content Include="Resources\photo.jpg" />
     <None Include="Resources\start.png" />
     <Content Include="Resources\Tile\Tile.bmp" />

@@ -73,7 +73,7 @@ namespace Tanks
         {
             for (int y = 20; y < 260; y += 40)
                 for (int x = 20; x < 260; x += 40)
-                    e.Graphics.DrawImage(model.wall.Img, new Point(x, y));
+                    e.Graphics.DrawImage(model.Wall.Img, new Point(x, y));
         }
 
         protected override void OnPaint(PaintEventArgs e)

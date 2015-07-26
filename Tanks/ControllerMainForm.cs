@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Windows.Forms;
 using Tanks.Properties;
+using System.Media;
 
 namespace Tanks
 {
@@ -9,10 +10,12 @@ namespace Tanks
     {
         private readonly View _view;
         private readonly Model _model;
-
         private bool _isSound;
-
         private Thread _modelPlay;
+        private SoundPlayer sp;
+        private readonly string infoAboutMe = "Игра \"Пакмен\" версии 1.0\n" +
+                            "Разработчик Новопашин Михаил\n" +
+                            "Для управления используйте w,s,a,d и выстрел f";
 
         public ControllerMainForm() : this(260)
         {
@@ -36,6 +39,8 @@ namespace Tanks
             _view = new View(_model);
             Controls.Add(_view);
 
+            sp = new SoundPlayer(Properties.Resources.AudioTanks);
+
             _isSound = true;
         }
 
@@ -47,6 +52,17 @@ namespace Tanks
         private void SetValueToStrLbl()
         {
             GameStatus_lbl_ststrp.Text = _model.GameStatus.ToString();
+            if (_isSound)
+            {
+                if (_model.GameStatus == GameStatus.Playing)
+                    sp.PlayLooping();
+                else
+                    sp.Stop();
+            }
+            else
+            {
+                sp.Stop();
+            }
         }
 
         private void StartPause_btn_Click(object sender, System.EventArgs e)
@@ -83,11 +99,6 @@ namespace Tanks
             }
         }
 
-        private void ControllerMainForm_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
-        {
-            
-        }
-
         private void StartStop_pcbx_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             switch (e.KeyData.ToString())
@@ -109,30 +120,35 @@ namespace Tanks
                     _model.Pacman.NextDirectX = 0;
                     break;
                 case "F":
-                    _model.Tile.DirectX = _model.Pacman.DirectX;
-                    _model.Tile.DirectY = _model.Pacman.DirectY;
-
-                    if (_model.Pacman.DirectY == -1)
-                    {
-                        _model.Tile.X = _model.Pacman.X + 5;
-                        _model.Tile.Y = _model.Pacman.Y;
-                    }
-                    if (_model.Pacman.DirectY == 1)
-                    {
-                        _model.Tile.X = _model.Pacman.X + 5;
-                        _model.Tile.Y = _model.Pacman.Y + 20;
-                    }
-                    if (_model.Pacman.DirectX == -1)
-                    {
-                        _model.Tile.X = _model.Pacman.X;
-                        _model.Tile.Y = _model.Pacman.Y + 5;
-                    }
-                    if (_model.Pacman.DirectX == 1)
-                    {
-                        _model.Tile.X = _model.Pacman.X + 20;
-                        _model.Tile.Y = _model.Pacman.Y + 5;
-                    }
+                    SetProjectTileFromStart();
                     break;
+            }
+        }
+
+        private void SetProjectTileFromStart()
+        {
+            _model.Tile.DirectX = _model.Pacman.DirectX;
+            _model.Tile.DirectY = _model.Pacman.DirectY;
+
+            if (_model.Pacman.DirectY == -1)
+            {
+                _model.Tile.X = _model.Pacman.X + 5;
+                _model.Tile.Y = _model.Pacman.Y;
+            }
+            if (_model.Pacman.DirectY == 1)
+            {
+                _model.Tile.X = _model.Pacman.X + 5;
+                _model.Tile.Y = _model.Pacman.Y + 20;
+            }
+            if (_model.Pacman.DirectX == -1)
+            {
+                _model.Tile.X = _model.Pacman.X;
+                _model.Tile.Y = _model.Pacman.Y + 5;
+            }
+            if (_model.Pacman.DirectX == 1)
+            {
+                _model.Tile.X = _model.Pacman.X + 20;
+                _model.Tile.Y = _model.Pacman.Y + 5;
             }
         }
 
@@ -154,14 +170,16 @@ namespace Tanks
 
         private void AboutToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            MessageBox.Show("Игра \"Пакмен\" версии 1.0\n" +
-                            "Разработчик Новопашин Михаил\n" +
-                            "Для управления используйте w,s,a,d и выстрел f", "Tanks");
+            MessageBox.Show(infoAboutMe, "Tanks");
         }
 
         private void SoundToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             _isSound = !_isSound;
+            if (_isSound)
+                soundToolStripMenuItem.Image = Resources.Ok;
+            else
+                soundToolStripMenuItem.Image = Resources.NotOk;
         }
     }
 }
