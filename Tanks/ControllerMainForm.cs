@@ -94,7 +94,7 @@ namespace Tanks
             }
             if (Resources.ControllerMainForm_ControllerMainForm_FormClosing_Вы_уверены_ != null)
             {
-                DialogResult dr = MessageBox.Show(text: Resources.ControllerMainForm_ControllerMainForm_FormClosing_Вы_уверены_, caption: Resources.ControllerMainForm_ControllerMainForm_FormClosing_Tanks, buttons: MessageBoxButtons.YesNo);
+                DialogResult dr = MessageBox.Show(Resources.ControllerMainForm_ControllerMainForm_FormClosing_Вы_уверены_, Resources.ControllerMainForm_ControllerMainForm_FormClosing_Tanks, MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button2, MessageBoxOptions.DefaultDesktopOnly);
                 e.Cancel = dr != DialogResult.Yes;
             }
         }
@@ -170,7 +170,7 @@ namespace Tanks
 
         private void AboutToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            MessageBox.Show(infoAboutMe, Resources.ControllerMainForm_ControllerMainForm_FormClosing_Tanks);
+            MessageBox.Show(infoAboutMe, Resources.ControllerMainForm_ControllerMainForm_FormClosing_Tanks, MessageBoxButtons.OK, MessageBoxIcon.Asterisk, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
         }
 
         private void SoundToolStripMenuItem_Click(object sender, System.EventArgs e)
