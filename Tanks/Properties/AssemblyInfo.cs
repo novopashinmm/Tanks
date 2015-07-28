@@ -7,11 +7,11 @@ using System.Resources;
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
 [assembly: AssemblyTitle("Tanks")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Objects: Tanks, Pacman, Apple, Tile...")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("MikhailSoft")]
 [assembly: AssemblyProduct("Tanks")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCopyright("NovopashinCopyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

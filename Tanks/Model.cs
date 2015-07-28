@@ -24,8 +24,8 @@ namespace Tanks
         public int SpeedGame { get; private set; }
         public ProjectTile Tile { get; private set; }
         public Pacman Pacman { get; private set; }
-        public ICollection<FireTank> FireTanks { get; private set; }
-        public ICollection<Apple> Apples { get; private set; }
+        public IList<FireTank> FireTanks { get; private set; }
+        public IList<Apple> Apples { get; private set; }
         
         public Model(int sizeField, int amountTanks, int amountApple, int speedGame)
         {
@@ -84,7 +84,7 @@ namespace Tanks
                 IfColisionOfTanks();
                 IfColisionOfTankAndPacman();
                 IfPickApples();
-
+                
                 if (_collectedApples > 4)
                 {
                     Status = GameStatus.Winner;
@@ -116,9 +116,9 @@ namespace Tanks
         {
             for (int z = 0; z < Apples.Count; z++)
             {
-                if (Math.Abs(Pacman.X - Apples.ToArray()[z].X) < 3 && Math.Abs(Pacman.Y - Apples.ToArray()[z].Y) < 3)
+                if (Math.Abs(Pacman.X - Apples[z].X) < 3 && Math.Abs(Pacman.Y - Apples[z].Y) < 3)
                 {
-                    Apples.ToArray()[z] = new Apple(_step += 30, 280);
+                    Apples[z] = new Apple(_step += 30, 280);
                     _collectedApples++;
                     CreateApples(_collectedApples);
                 }
